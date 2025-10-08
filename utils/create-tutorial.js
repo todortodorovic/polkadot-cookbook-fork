@@ -202,7 +202,7 @@ function bootstrapTests(slug) {
   execSync(`cd ${tutorialDir} && npm i @polkadot/api ws`, { stdio: 'inherit' });
 
   // Set npm scripts
-  execSync(`cd ${tutorialDir} && npm pkg set scripts.test="vitest run" scripts.test:watch="vitest"`, { stdio: 'ignore' });
+  execSync(`cd ${tutorialDir} && npm pkg set scripts.test="vitest run" scripts.test:watch="vitest" scripts.preview="node ../../common-preview-server/server.js ."`, { stdio: 'ignore' });
 
   // Kreiraj vitest.config.ts
   const vitestConfig = `import { defineConfig } from 'vitest/config';
@@ -320,22 +320,25 @@ async function createTutorial(slug) {
 
   log('📝 Next Steps:', 'yellow');
   console.log('');
-  log(`  1. Write your tutorial content:`, 'cyan');
+  log(`  1. Preview your tutorial live (recommended):`, 'cyan');
+  console.log(`     ${colors.reset}cd tutorials/${slug} && npm run preview`);
+  console.log('');
+  log(`  2. Write your tutorial content:`, 'cyan');
   console.log(`     ${colors.reset}tutorials/${slug}/README.md`);
   console.log('');
-  log(`  2. Add your code implementation:`, 'cyan');
+  log(`  3. Add your code implementation:`, 'cyan');
   console.log(`     ${colors.reset}tutorials/${slug}/${slug}-code/`);
   console.log('');
-  log(`  3. Write comprehensive tests:`, 'cyan');
+  log(`  4. Write comprehensive tests:`, 'cyan');
   console.log(`     ${colors.reset}tutorials/${slug}/tests/`);
   console.log('');
-  log(`  4. Run tests to verify:`, 'cyan');
+  log(`  5. Run tests to verify:`, 'cyan');
   console.log(`     ${colors.reset}cd tutorials/${slug} && npm test`);
   console.log('');
-  log(`  5. Update tutorial.yml metadata:`, 'cyan');
+  log(`  6. Update tutorial.yml metadata:`, 'cyan');
   console.log(`     ${colors.reset}tutorials/${slug}/tutorial.yml`);
   console.log('');
-  log(`  6. When ready, open a Pull Request:`, 'cyan');
+  log(`  7. When ready, open a Pull Request:`, 'cyan');
   console.log(`     ${colors.reset}git add -A`);
   console.log(`     ${colors.reset}git commit -m "feat(tutorial): add ${slug}"`);
   console.log(`     ${colors.reset}git push origin feat/tutorial-${slug}`);
